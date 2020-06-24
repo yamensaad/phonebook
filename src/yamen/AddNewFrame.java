@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 public class AddNewFrame extends javax.swing.JFrame {
@@ -169,16 +170,24 @@ public class AddNewFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      String firstName = firstFld.getText();
-      String  lastName = lastFld.getText();
-      String  homephone = homeFld.getText();
-      String  workphone = workFld.getText();
-      String  email =  emailFld.getText(); ///bring the text insiede 
-       stmt=con.createStatement(); 
-        String query = "INSERT INTO `pepole`( `fname`, `lname`, `home`, `work`, `mail`) VALUES ('','','','','')";  
-        
-    
-        stmt.executeUpdate(query);
+          try {
+              String firstName = firstFld.getText();
+              String  lastName = lastFld.getText();
+              String  homephone = homeFld.getText();
+              String  workphone = workFld.getText();
+              String  email =  emailFld.getText(); ///bring the text insiede
+              stmt=con.createStatement();
+              JOptionPane.showMessageDialog(this, "Added successfuly","Add new ",JOptionPane.INFORMATION_MESSAGE);
+              
+              String query = "INSERT INTO `pepole`( `fname`, `lname`, `home`, `work`, `mail`) "
+                      + " VALUES ('"+firstName+"','"+lastName+"','"+homephone+"','"+workphone+"','"+email+"')";
+              
+              
+              stmt.executeUpdate(query);
+              
+          } catch (SQLException ex) {
+              Logger.getLogger(AddNewFrame.class.getName()).log(Level.SEVERE, null, ex);
+          }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
